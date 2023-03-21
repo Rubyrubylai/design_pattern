@@ -2,18 +2,21 @@ from abc import ABC, abstractmethod
 
 
 class FlyBehavior(ABC):
+    @classmethod
     @abstractmethod
     def fly(cls):
         raise NotImplementedError
 
 
 class FlyWithWings(FlyBehavior):
-    def fly(self):
+    @classmethod
+    def fly(cls):
         print('I can fly')
 
 
 class FlyNoWay(FlyBehavior):
-    def fly(self):
+    @classmethod
+    def fly(cls):
         print('I cannot fly')
 
 
@@ -25,7 +28,7 @@ class Duck:
         print('All ducks float')
 
     def performFly(self):
-        self.flyBehavior().fly()
+        self.flyBehavior.fly()
 
     def setFlyBehavior(self, fb):
         self.flyBehavior = fb
