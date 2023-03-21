@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Optional
 
 
 class FlyBehavior(ABC):
@@ -21,7 +22,7 @@ class FlyNoWay(FlyBehavior):
 
 
 class Duck:
-    def __init__(self, fb=None):
+    def __init__(self, fb: Optional[FlyBehavior]=None):
         self.flyBehavior = fb
 
     def swim(self):
@@ -30,7 +31,7 @@ class Duck:
     def performFly(self):
         self.flyBehavior.fly()
 
-    def setFlyBehavior(self, fb):
+    def setFlyBehavior(self, fb: FlyBehavior):
         self.flyBehavior = fb
 
 
