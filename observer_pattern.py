@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from typing import Optional, List
 
 
+# 主題介面
 class Subject(ABC):
     @abstractmethod
     def registerObserver(self, observer: Observer):
@@ -18,20 +19,20 @@ class Subject(ABC):
 
 
 class WeatherData(Subject):
-    _observers: List[Observer] = []
+    __observers: List[Observer] = []
     __temperature: Optional[float] = None
     __humidity: Optional[float] = None
     __pressure: Optional[float] = None
     __weather: Optional[str] = None
 
     def registerObserver(self, observer: Observer):
-        self._observers.append(observer)
+        self.__observers.append(observer)
 
     def removeObserver(self, observer: Observer):
-        self._observers.remove(observer)
+        self.__observers.remove(observer)
 
     def notifyObservers(self):
-        for observer in self._observers:
+        for observer in self.__observers:
             observer.update(self)
 
     def measurementsChanged(self):
@@ -44,28 +45,30 @@ class WeatherData(Subject):
         self.__weather = weather
         self.measurementsChanged()
 
-    def getTemperature(self):
+    def getTemperature(self) -> float:
         return self.__temperature
 
-    def getHumidity(self):
+    def getHumidity(self) -> float:
         return self.__humidity
 
-    def getPressure(self):
+    def getPressure(self) -> float:
         return self.__pressure
 
-    def getWeather(self):
+    def getWeather(self) -> float:
         return self.__weather
 
+
+# 觀察者介面
 class Observer(ABC):
     @abstractmethod
     def update(self):
-        raise NotImplementedError    
+        raise NotImplementedError
 
 
 class DisplayElement(ABC):
     @abstractmethod
     def display(self):
-        raise NotImplementedError  
+        raise NotImplementedError
 
 
 class CurrentConditionDisplay(Observer, DisplayElement):
