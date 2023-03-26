@@ -2,6 +2,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 
 
+# 提供抽象介面，建立出一個產品
 class PizzaStore(ABC):
     def orderPizza(self, type_: str):
         pizza = self.createPizza(type_)
@@ -11,13 +12,14 @@ class PizzaStore(ABC):
         pizza.box()
         print()
 
+    # 工廠方法: 抽象的 creator 提供一個方法，能夠建立物件
     @abstractmethod
-    def createPizza(self, type_: str):
-        raise NotImplementedError
+    def createPizza(self, type_: str) -> Pizza:
+        pass
 
 
 class NYPizzaStore(PizzaStore):
-    def createPizza(self, type_: str):
+    def createPizza(self, type_: str) -> Pizza:
         if type_ == 'cheese':
             pizza = NYStyleCheesePizza()
         elif type_ == 'calm':
@@ -27,7 +29,7 @@ class NYPizzaStore(PizzaStore):
 
 
 class ChicagoPizzaStore(PizzaStore):
-    def createPizza(self, type_: str):
+    def createPizza(self, type_: str) -> Pizza:
         if type_ == 'cheese':
             pizza = ChicagoStyleCheesePizza()
         elif type_ == 'calm':
@@ -74,8 +76,8 @@ class NYStyleCalmPizza(Pizza):
     def __init__(self):
         super().__init__()
         self.name = 'NY Style Sauce and Calm Pizza'
-        self.dough = 'Double Crust dough'
-        self.sauce = 'Bazhe Sauce'
+        self.dough = 'Thin Crust dough'
+        self.sauce = 'Marinara Sauce'
         self.toppings.append('Grated Reggiano Cheese')
 
 
@@ -83,8 +85,8 @@ class ChicagoStyleCheesePizza(Pizza):
     def __init__(self):
         super().__init__()
         self.name = 'Chicago Style Sauce and Cheese Pizza'
-        self.dough = 'Extra Thich Crust dough'
-        self.sauce = 'Marie Rose Sauce'
+        self.dough = 'Extra Thick Crust dough'
+        self.sauce = 'Plum Tomato Sauce'
         self.toppings.append('Shredded Mozzarella Cheese')
 
     def cut(self):
@@ -95,7 +97,7 @@ class ChicagoStyleCalmPizza(Pizza):
     def __init__(self):
         super().__init__()
         self.name = 'Chicago Style Sauce and Calm Pizza'
-        self.dough = 'Extra Thich Crust dough'
+        self.dough = 'Extra Thick Crust dough'
         self.sauce = 'Plum Tomato Sauce'
         self.toppings.append('Shredded Mozzarella Cheese')
 

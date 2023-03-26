@@ -19,8 +19,8 @@ class PizzaStore:
 
 class PizzaFactory(ABC):
     @abstractmethod
-    def createPizza(self, type_: str):
-        raise NotImplementedError
+    def createPizza(self, type_: str) -> Pizza:
+        pass
 
 
 class NYPizzaFactory(PizzaFactory):
