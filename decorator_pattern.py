@@ -1,3 +1,6 @@
+'''
+不改變介面，但加入責任
+'''
 from abc import ABC, abstractmethod
 
 
